@@ -11,12 +11,13 @@ class Game{
 
     _collisionDetector = new CollisionDetector();
 
-    _stage = (new StageLoader()).loadStage("stage.png");
+    List<Entity> loadedEnemies = new ArrayList<Entity>();
+    _stage = (new StageLoader()).loadStage("stage.png", loadedEnemies);
 
-    setupEntities();
+    setupEntities(loadedEnemies);
   }
 
-  void setupEntities(){
+  void setupEntities(List<Entity> enemyList){
     _entities.clear();
     _enemies.clear();
     _effects.clear();
@@ -24,6 +25,8 @@ class Game{
     _hero = new Hero();
 
     _entities.add(_hero);
+    _enemies.addAll(enemyList);
+    _entities.addAll(_enemies);
     for(Entity entity: _entities){
       entity.setStage(_stage);
     }

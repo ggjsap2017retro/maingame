@@ -2,7 +2,6 @@ Resources resources = new Resources();
 static int displayScale = 2;
 Game game = new Game();
 
-Enemy enemy;
 void setup(){
   surface.setSize(16*20*displayScale, 16*15*displayScale);
   try{
@@ -10,8 +9,6 @@ void setup(){
   }catch(Exception e){}
 
   game.setup();
-
-  enemy = new Enemy(16, 16, EnemyType.Bird);
 }
 
 void draw(){
@@ -20,10 +17,6 @@ void draw(){
   pushMatrix();
   scale(displayScale, displayScale);
   game.draw();
-
-  enemy.update();
-  enemy.draw();
-
   popMatrix();
 }
 

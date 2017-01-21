@@ -31,10 +31,7 @@ class Enemy implements Entity{
   };
   
   void draw(){
-    pushMatrix();
-    translate(_x,_y);
     _animation.draw(1);
-    popMatrix();
   }
 
   void update(){
