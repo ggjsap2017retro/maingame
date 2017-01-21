@@ -1,11 +1,4 @@
-Enemy boss;
-
-PImage[] img;
-int cell=2;
-int number=0;
-int x,y;
-
-void setup(){
+/*void setup(){
  size(1200,800);
  boss=new Enemy(150,200,100,3);
  img=new PImage[cell];
@@ -21,21 +14,28 @@ void draw(){
    number=number%cell;
    boss.move();
    boss.display();
-}
+   image(img,x,y);
+}*/
 
 class Enemy{
+  Animation _fly;
   float x,y,diameter;
   float speed;
-  int direction=5;
+  int direction=1;
   Enemy(float xpos,float ypos,float dia,float sp){
     x=xpos;
     y=ypos;
     diameter=dia;
     speed=sp;
+    _fly=new Animation("Bird",2);
   }
   
-  void display(){
-   image(img[number],x,y);
+  void draw(){
+    _fly.draw(1);
+    pushMatrix();
+    translate(x,y);
+    _fly.draw(1);
+    popMatrix();
   }
   void move(){
     x+=(speed*direction);
