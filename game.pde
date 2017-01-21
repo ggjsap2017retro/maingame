@@ -1,3 +1,4 @@
+
 class Game{
   Stage _stage;;
   
@@ -6,8 +7,12 @@ class Game{
   private List<Entity> _effects  = new ArrayList<Entity>();
   private List<Entity> _enemies  = new ArrayList<Entity>();
   private Hero _hero;
+  private boolean _isGameover;
+  private boolean _isGoal;
 
   void setup(){
+    _isGameover = false;
+    _isGoal = false;
 
     _collisionDetector = new CollisionDetector();
 
@@ -37,14 +42,31 @@ class Game{
   }
 
   void updateEntities(){
+    _collisionDetector.update(_entities);
     for(Entity entity: _entities){
       entity.update();
+    }
+
+    //ゲームオーバの条件チェック
+    //体力切れ
+    if(_hero.hitPoint() <= 0){
+      _isGameover = true;
+    }
+    //画面下に落下した場合
+    if(_hero.y() > 15*16){
+      _isGameover = true;
+    }
+
+    //クリア条件
+    //stageの右端にたどり着く
+    if(_stage.width()*16 < _hero.x()) {
+      _isGoal = true;
     }
   }
 
   void draw(){
     pushMatrix();
-    translate(20*8, 15*8);
+    translate(20*8, 20*8);
     resources.draw("back3.png");
     popMatrix();
 
@@ -75,6 +97,13 @@ class Game{
 
   void keyReleased(char k, int kCode){
     _hero.keyReleased(k, kCode);
+  }
+
+  boolean isGameover(){
+    return _isGameover;
+  }
+  boolean isGoal(){
+    return _isGoal;
   }
 
 }

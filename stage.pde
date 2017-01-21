@@ -28,7 +28,9 @@ class Stage{
     return _field[y][x].type;
   }
 
-  //float x = 30 ,y = 470;
+  int width(){return _cw;}
+  int height(){return _ch;}
+
   float vx = 3,vy = 0;
   boolean mouseReleased=true;
   void setup(){
@@ -37,9 +39,6 @@ class Stage{
   void draw(){
     for(int y = 0; y < _ch; y++){
       for(int x = 0;x < _cw; x++){
-        //for debug
-        line(x*16,y*16,x*16,y*16);
-
         pushMatrix();
         translate(x*16, y*16);
         _field[y][x].draw();

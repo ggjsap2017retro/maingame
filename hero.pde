@@ -21,12 +21,18 @@ class Hero implements Entity{
   Animation _animationRun;
   Animation _animationPanch;
   Animation _animationKick;
+  int _animationCounter;
 
   Hero(){
     _animationRun   = new Animation("player_run", 4);
     _animationPanch = new Animation("player_panch", 2);
     _animationKick  = new Animation("player_kick", 2);
+    _animationCounter = 0;
   }
+
+  private int _hitPoint = 50;
+
+  int hitPoint(){return _hitPoint;}
 
   void setup(){
   }
@@ -109,11 +115,27 @@ class Hero implements Entity{
   float y(){return _y;}
 
   EntityTypes type(){return EntityTypes.Hero;}
-  void callCollidingEvent(EntityTypes type){};
+  void callCollidingEvent(EntityTypes type){
+    if(type == EntityTypes.Enemy){
+      _hitPoint -= 1;
+    }
+  };
 
   void draw() {
-    _animationRun.draw(1);
     
+    if(_rightKey || _leftKey){
+      _animationCounter += 1;
+    }
+
+    if(_leftKey){
+      pushMatrix();
+      scale(-1, 1);
+      _animationRun.draw((_animationCounter/4)%4);
+      popMatrix();
+    }else{
+      _animationRun.draw((_animationCounter/4)%4);
+    }
+
     // if(_rightKey==true){
     //   _x+=4;
     //   image(hito2,_x,463);
