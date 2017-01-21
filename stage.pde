@@ -7,10 +7,12 @@ class Stage{
   Stage(int w, int h){
     _cw = w;
     _ch = h;
+    field = new Tile[_ch][_cw];
+    init();
   };
 
   //
-  Tile[][] field = new Tile[_ch][_cw];
+  Tile[][] field;
   //float x = 30 ,y = 470;
   float vx = 3,vy = 0;
   boolean mouseReleased=true;
@@ -19,7 +21,6 @@ class Stage{
   }
 
   void draw(){
-    init();
     background(0,255,255);
     fill(0,240,0);
     for(int y = 0; y < _ch; y++){
@@ -27,10 +28,10 @@ class Stage{
         //for debug
         line(x*16,y*16,x*16,y*16);
 
-        popMatrix();
+        pushMatrix();
         translate(x*16, y*16);
         field[y][x].draw();
-        pushMatrix();
+        popMatrix();
       }
     }
   }

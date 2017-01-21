@@ -10,11 +10,13 @@ class Tile{
   Tile(TileType t){
     type = t;
     //TODO 複数のタイルに対応
-    _animation = new Animation("tile");
+    _animation = new Animation("Bird1");
   }
 
   void draw(){
     //TODO 複数のタイルに対応
-    _animation.draw();
+    if(type == TileType.Block){
+      _animation.draw();
+    }
   }
 }
