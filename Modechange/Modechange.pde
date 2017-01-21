@@ -47,7 +47,7 @@ int game(){
   if(x>=20){
     return 2;
   } // start game
-  else if(t > 5){  // if ellapsed time is larger than 5 seconds
+  else if(life<=0){  // if ellapsed time is larger than 5 seconds
     return 3; // go to ending
   } 
   return 1;
