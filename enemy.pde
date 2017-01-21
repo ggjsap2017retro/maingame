@@ -50,7 +50,6 @@ class Enemy{
     _fly.draw(1);
     popMatrix();
     
-    _dwalk.draw(1);
     pushMatrix();
     translate(x,y+75);
     _dwalk.draw(1);
@@ -63,3 +62,20 @@ class Enemy{
     }
   }
 }
+
+/*class Boss{
+  Animation _boss;
+  float x,y,speed;
+  Boss(float xpos,float ypos,float sp){
+  x=xpos;
+  y=ypos;
+  speed=sp;
+  _boss=new Animation("boss_run",2);
+  }
+  void draw(){
+    pushMatrix();
+    translate(x,y);
+    _boss.draw(1);
+    popMatrix();
+  }
+}*/
