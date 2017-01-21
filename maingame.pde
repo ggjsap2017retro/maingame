@@ -1,3 +1,11 @@
-void setup(){}
+Resources resources = new Resources();
+Game game = new Game();
 
-void draw(){}
+void setup(){
+  game.setup();
+}
+
+void draw(){
+  game.update();
+  game.draw();
+}
