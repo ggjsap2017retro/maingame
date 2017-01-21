@@ -4,7 +4,7 @@ float t;
 int x=0;
 PImage img;
 void setup(){
-size(900, 700);
+size(1024, 768);
   textSize(32);
   textAlign(CENTER);
   fill(255);
