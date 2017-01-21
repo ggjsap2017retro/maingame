@@ -45,7 +45,6 @@ class Enemy{
   }
   
   void draw(){
-    _fly.draw(1);
     pushMatrix();
     translate(x,y+30);
     _fly.draw(1);
