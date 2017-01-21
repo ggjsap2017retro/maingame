@@ -2,8 +2,7 @@ interface Entity{
   void update();
   void draw();
   boolean shouldDie();
-  // void shouldDie(boolean b);
-
+  void setStage(Stage s);
   int width();
   int height();
 
