@@ -41,6 +41,11 @@ class Game{
 
   void draw(){
     pushMatrix();
+    translate(20*8, 15*8);
+    resources.draw("back3.png");
+    popMatrix();
+
+    pushMatrix();
     translate(int(-_hero.x()+16*10), 0);
     _stage.draw();
     drawEntities();

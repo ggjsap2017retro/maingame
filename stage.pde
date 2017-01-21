@@ -32,12 +32,9 @@ class Stage{
   float vx = 3,vy = 0;
   boolean mouseReleased=true;
   void setup(){
-    size(320, 240);
   }
 
   void draw(){
-    background(0,255,255);
-    fill(0,240,0);
     for(int y = 0; y < _ch; y++){
       for(int x = 0;x < _cw; x++){
         //for debug
