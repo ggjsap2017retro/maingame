@@ -15,7 +15,7 @@ void draw(){
 background(0);
 img=loadImage("70543471.jpg");
 image(img,0,0);
-  t = (millis() - t_start) / 1000.0; 
+ // t = (millis() - t_start) / 1000.0; 
  // text(nf(t, 1, 3)  + "sec.", width * 0.5, height * 0.9); 
   
   int nextState= 0;
@@ -28,7 +28,7 @@ image(img,0,0);
 }
 int title(){
   //text("Game Title", width * 0.5, height * 0.3);
-  text("Press 'z' key to start", width * 0.5, height * 0.7);
+  //text("Press 'space' key to start", width * 0.5, height * 0.7);
   if(keyPressed && key == 'z'){ // if 'z' key is pressed
     return 1; // start game
   }
@@ -51,9 +51,9 @@ int ending(){
   background(0);
   img=loadImage("70543471.jpg");
 image(img,0,0);
-  text("Ending", width * 0.5, height * 0.5); //<>//
+  //text("Ending", width * 0.5, height * 0.5); //<>//
   if(t > 3){
-    text("Press 'a' to restart.", width * 0.5, height * 0.7);
+    //text("Press 'a' to restart.", width * 0.5, height * 0.7);
     if(keyPressed && key == 'a') return 0;
   }
   return 2;
@@ -63,10 +63,10 @@ int gameover()
   background(0);
   img=loadImage("70543471.jpg");
   image(img,0,0);
-  t = (millis() - t_start) / 1000.0;
-  text("Gameover", width * 0.5, height * 0.5);
+ // t = (millis() - t_start) / 1000.0;
+  //text("Gameover", width * 0.5, height * 0.5);
   if(t > 3){
-    text("Press 'a' to restart.", width * 0.5, height * 0.7);
+   // text("Press 'a' to restart.", width * 0.5, height * 0.7);
     if(keyPressed && key == 'a') return 0;
   }
   return 3;
