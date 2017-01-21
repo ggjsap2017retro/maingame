@@ -1,7 +1,7 @@
-  int state;
+int state;
 long t_start;
 float t;
-int x=0;
+int life;
 PImage img;
 void setup(){
 size(1024, 768);
@@ -11,7 +11,6 @@ size(1024, 768);
   state = 0;
   t_start = millis();
 }
-
 void draw(){
 background(0);
 img=loadImage("70543471.jpg");
@@ -28,26 +27,21 @@ image(img,0,0);
   state = nextState;
 }
 int title(){
-  text("Game Title", width * 0.5, height * 0.3);
+  //text("Game Title", width * 0.5, height * 0.3);
   text("Press 'z' key to start", width * 0.5, height * 0.7);
   if(keyPressed && key == 'z'){ // if 'z' key is pressed
     return 1; // start game
   }
   return 0;
 }
-  
+
  
 
 int game(){
   background(0); 
-  text("Game (for 5 seconds)", width * 0.5, height * 0.5);
-      if(keyPressed && key == 'y'){ 
-    x++;
-  }
-  if(x>=20){
-    return 2;
-  } // start game
-  else if(life<=0){  // if ellapsed time is larger than 5 seconds
+  img=loadImage("70543471.jpg");
+image(img,0,0);
+  if(life<=0){  // if ellapsed time is larger than 5 seconds
     return 3; // go to ending
   } 
   return 1;
@@ -55,8 +49,9 @@ int game(){
 
 int ending(){
   background(0);
-  text("Ending", width * 0.5, height * 0.5);
-  x=0;
+  img=loadImage("70543471.jpg");
+image(img,0,0);
+  text("Ending", width * 0.5, height * 0.5); //<>//
   if(t > 3){
     text("Press 'a' to restart.", width * 0.5, height * 0.7);
     if(keyPressed && key == 'a') return 0;
@@ -68,7 +63,7 @@ int gameover()
   background(0);
   img=loadImage("70543471.jpg");
   image(img,0,0);
-  t = (millis() - t_start) / 1000.0; x=0;
+  t = (millis() - t_start) / 1000.0;
   text("Gameover", width * 0.5, height * 0.5);
   if(t > 3){
     text("Press 'a' to restart.", width * 0.5, height * 0.7);
