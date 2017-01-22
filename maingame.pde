@@ -1,14 +1,16 @@
 Resources resources = new Resources();
 static int displayScale = 2;
 Game game = new Game();
+Animation _animation;
 
 enum GameStatus{
   Title, Tutorial, Playing, Gameover, Clear, Endroll
 }
-
+int tutocount;
 GameStatus gameStatus;
 
 void setup(){
+  _animation=new Animation("operating",8);
   surface.setSize(16*20*displayScale, 16*15*displayScale);
   try{
     resources.minim = new Minim(this);
@@ -27,12 +29,33 @@ void draw(){
 
   if(gameStatus == GameStatus.Title){
     pushMatrix();
-    translate(20*8, 15*8);
+    translate(20*8, 15*10);
     resources.draw("Title.png");
     popMatrix();
   }
 
   if(gameStatus == GameStatus.Tutorial){
+ 
+    pushMatrix();
+    translate(20*8, 15*10.7);
+    resources.draw("operating1.png");
+    _animation.draw(tutocount);
+    if(tutocount<7){
+    tutocount++;
+    try{
+    Thread.sleep(200);
+  }catch(InterruptedException e){ 
+e.printStackTrace(); 
+} 
+    }else{
+    tutocount=0;
+    try{
+    Thread.sleep(200);
+  }catch(InterruptedException e){ 
+e.printStackTrace(); 
+} 
+  }
+    popMatrix();
   }
 
   if(gameStatus == GameStatus.Playing){
@@ -50,16 +73,24 @@ void draw(){
 
   if(gameStatus == GameStatus.Gameover){
     pushMatrix();
-    translate(20*8, 15*8);
+    translate(20*8, 15*10.7);
     resources.draw("Gameover.png");
     popMatrix();
   }
 
   if(gameStatus == GameStatus.Clear){
+    pushMatrix();
+    translate(20*8, 15*10.7);
+    resources.draw("clear.png");
+    popMatrix();
   }
 
 
   if(gameStatus == GameStatus.Endroll){
+    pushMatrix();
+    translate(20*8, 15*10.7);
+    resources.draw("endroll.png");
+    popMatrix();
   }
 
   popMatrix();
