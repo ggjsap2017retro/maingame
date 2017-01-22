@@ -47,7 +47,7 @@ class Hero implements Entity{
   void update(){
     if(_stage.fieldTileType((int)((_x+8)/16.0), (int)((_y+8.0+8.0)/16.0)) != TileType.Block){
       _enableToJumped = false;
-      _vy += 0.1;
+      _vy += 0.2;
     }else{
       _enableToJumped = true;
       _vy = 0; 
@@ -187,7 +187,7 @@ class Hero implements Entity{
       }
     }
 
-    if(k =='x'||k=='X'){
+    if(k =='x'||k=='X'){ 
       _rightKey=false;
       _leftKey=false;
       _panchKey=true;
