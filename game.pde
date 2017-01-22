@@ -47,6 +47,8 @@ class Game{
       entity.update();
     }
 
+    killEntities();
+
     //ゲームオーバの条件チェック
     //体力切れ
     if(_hero.hitPoint() <= 0){
@@ -62,6 +64,16 @@ class Game{
     if(_stage.width()*16 < _hero.x()) {
       _isGoal = true;
     }
+  }
+
+  void killEntities(){
+    List<Entity> newList = new ArrayList<Entity>();
+    for(Entity entity: _entities){
+      if(!entity.shouldDie()){
+        newList.add(entity);
+      }
+    }
+    _entities = newList;
   }
 
   void draw(){
@@ -93,6 +105,9 @@ class Game{
 
   void keyPressed(char k, int kCode){
     _hero.keyPressed(k, kCode);
+    if(k == 'z'){
+      _entities.add(new Shock(_hero.x()+8, _hero.y()+8));
+    }
   }
 
   void keyReleased(char k, int kCode){
