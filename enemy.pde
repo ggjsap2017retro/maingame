@@ -1,22 +1,3 @@
-/*void setup(){
- size(1200,800);
- boss=new Enemy(150,200,100,3);
- img=new PImage[cell];
- for(int i=1;i<=img.length;i++){
-   img[i-1]=loadImage("change"+i+".png");
- }
- frameRate(10);
-}
-
-void draw(){
-   background(0);
-   number++;
-   number=number%cell;
-   boss.move();
-   boss.display();
-   image(img,x,y);
-}*/
-
 enum EnemyType{
   Bird,Dog,Boss;
 }
@@ -28,14 +9,16 @@ class Enemy implements Entity{
   float speed;
   int direction=-1;
   EnemyType _enemytype;
-  Enemy(float xpos,float ypos, float sp,EnemyType t){
-    x=xpos;
-    y=ypos;
-    speed=sp;
+  boolean _shouldDie;
+  Enemy(float xpos,float ypos,EnemyType t){
+    _x=xpos;
+    _y=ypos;
     _enemytype=t;
     
-    if(_enemytype==EnemyType.Brid){
-      x=100;
+    _shouldDie = false;
+    if(_enemytype==EnemyType.Bird){ 
+      _animation = new Animation("Bird",2);
+      speed=1;
     }else if(_enemytype==EnemyType.Dog){
       _animation = new Animation("Dog",2);
       speed=0.5;
@@ -44,9 +27,12 @@ class Enemy implements Entity{
       speed=1;
     }
     
-    _fly=new Animation("Bird",2);
-    _dwalk=new Animation("Dog",2);
   }
+
+  private Stage _stage;
+  void setStage(Stage s){
+    _stage = s;
+  };
   
   void draw(){
     _animation.draw(0);
@@ -65,6 +51,7 @@ class Enemy implements Entity{
     }
     _x+=(speed*direction);
     if(_y>(20*16)){
+
       direction*=-1;
     }
     if(_enemytype==EnemyType.Dog){
