@@ -10,7 +10,7 @@ class Tile{
   Tile(TileType t){
     type = t;
     //TODO 複数のタイルに対応
-    _animation = new Animation("Bird1");
+    _animation = new Animation("floor2");
   }
 
   void draw(){

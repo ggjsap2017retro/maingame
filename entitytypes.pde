@@ -1,0 +1,3 @@
+enum EntityTypes{
+  Hero, Enemy
+}
