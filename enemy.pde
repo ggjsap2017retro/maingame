@@ -18,15 +18,15 @@ void draw(){
 }*/
 
 enum EnemyType{
-  Brid,Dog;
+  Bird,Dog,Boss;
 }
 
-class Enemy{
-  Animation _fly;
-  Animation _dwalk;
-  float x,y;
+class Enemy implements Entity{
+  Animation _animation ;
+  boolean _enableToJumped = false;
+  float _x,_y;
   float speed;
-  int direction=1;
+  int direction=-1;
   EnemyType _enemytype;
   Enemy(float xpos,float ypos, float sp,EnemyType t){
     x=xpos;
@@ -37,7 +37,11 @@ class Enemy{
     if(_enemytype==EnemyType.Brid){
       x=100;
     }else if(_enemytype==EnemyType.Dog){
-      x=900;
+      _animation = new Animation("Dog",2);
+      speed=0.5;
+    }else if(_enemytype==EnemyType.Boss){
+      _animation=new Animation("boss_stand0",2);
+      speed=1;
     }
     
     _fly=new Animation("Bird",2);
@@ -45,37 +49,35 @@ class Enemy{
   }
   
   void draw(){
-    pushMatrix();
-    translate(x,y+30);
-    _fly.draw(1);
-    popMatrix();
-    
-    pushMatrix();
-    translate(x,y+75);
-    _dwalk.draw(1);
-    popMatrix();
+    _animation.draw(0);
   }
-  void move(){
-    x+=(speed*direction);
-    if((x>(width-x))||(x<x/2)){
+  
+  float _fy = 0.1, _vy = 0;
+
+  void update(){
+    
+    if(_stage.fieldTileType((int)((_x+8)/16.0), (int)((_y+8.0+8.0)/16.0)) != TileType.Block){
+      _enableToJumped = false;
+      _vy += 0.3;
+    }else{
+      _enableToJumped = true;
+      _vy = 0; 
+    }
+    _x+=(speed*direction);
+    if(_y>(20*16)){
       direction*=-1;
     }
+    if(_enemytype==EnemyType.Dog){
+    _y+=_vy;
+    }
   }
-}
 
-/*class Boss{
-  Animation _boss;
-  float x,y,speed;
-  Boss(float xpos,float ypos,float sp){
-  x=xpos;
-  y=ypos;
-  speed=sp;
-  _boss=new Animation("boss_run",2);
-  }
-  void draw(){
-    pushMatrix();
-    translate(x,y);
-    _boss.draw(1);
-    popMatrix();
-  }
-}*/
+  boolean shouldDie(){return _shouldDie;}
+  int width(){return 16;}
+  int height(){return 16;};
+  float x(){return _x;}
+  float y(){return _y;}
+  EntityTypes type(){return EntityTypes.Enemy;}
+  //TODO
+  void callCollidingEvent(EntityTypes type){};
+}
