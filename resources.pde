@@ -12,7 +12,7 @@ class Resources{
     PImage image = _images.get(name);
 		int shiftX = -image.width/2;
 		int shiftY = -image.height/2;
-    image(_images.get(name), shiftX, shiftX);
+    image(_images.get(name), shiftX, shiftY);
   };
   
   void draw(String name, int x, int y){
