@@ -1,3 +1,3 @@
 enum EntityTypes{
-  Hero, Enemy
+  Hero, Enemy, Shock
 }
