@@ -1,8 +1,10 @@
-class Boss{
+class Boss implements Entity{
   Animation _boss;
   boolean _enableToJumped = false;
   float speed;
   float _x,_y;
+  int direction=-1;
+  boolean _shouldDie;
   Boss(float xpos,float ypos,float sp){
     _x=xpos;
     _y=ypos;
@@ -16,19 +18,23 @@ class Boss{
   };
   
   void  draw(){
-    _boss.draw(0);
+    //_boss.draw(0);
   }
   
   float _fy = 0.1, _vy = 0;
 
   void update(){
-  if(_stage.fieldTileType((int)((_x+8)/16.0), (int)((_y+8.0+8.0)/16.0)) != TileType.Block){
-      _enableToJumped = false;
-      _vy += 0.3;
-    }else{
-      _enableToJumped = true;
-      _vy = 0; 
+    _x+=(speed*direction);
+    if(_y>(20*16)){
+      direction*=-1;
     }
-    _y+=_vy;
   }
+  boolean shouldDie(){return _shouldDie;}
+  int width(){return 16;}
+  int height(){return 16;};
+  float x(){return _x;}
+  float y(){return _y;}
+  EntityTypes type(){return EntityTypes.Enemy;}
+  //TODO
+  void callCollidingEvent(EntityTypes type){};
 }

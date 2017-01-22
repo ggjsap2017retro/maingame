@@ -1,5 +1,5 @@
 enum EnemyType{
-  Bird,Dog,Boss;
+  Bird,Dog,Boss,Hito;
 }
 
 class Enemy implements Entity{
@@ -23,10 +23,10 @@ class Enemy implements Entity{
       _animation = new Animation("Dog",2);
       speed=0.5;
     }else if(_enemytype==EnemyType.Boss){
-      _animation=new Animation("boss_stand0",2);
-      speed=1;
+      _animation=new Animation("boss_stand",2);
+    }else if(_enemytype==EnemyType.Hito){
+      _animation=new Animation("hito_stand",2);
     }
-    
   }
 
   private Stage _stage;

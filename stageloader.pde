@@ -18,6 +18,12 @@ class StageLoader{
           if(c == #00FF00){
             enemyList.add(new Enemy(x*16, y*16, EnemyType.Bird));
           }
+          if(c==#00FFFF){
+            enemyList.add(new Enemy(x*16, y*16, EnemyType.Boss));
+          }
+          if(c==#0000FF){
+             enemyList.add(new Enemy(x*16, y*16, EnemyType.Hito));
+          }
         }
 
 
