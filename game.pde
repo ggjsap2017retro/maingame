@@ -1,7 +1,8 @@
 
-class Game{
-  Stage _stage;;
-  
+class Game {
+  Stage _stage;
+  ;
+
   private CollisionDetector _collisionDetector;
   private List<Entity> _entities = new ArrayList<Entity>();
   private List<Entity> _effects  = new ArrayList<Entity>();
@@ -9,8 +10,9 @@ class Game{
   private Hero _hero;
   private boolean _isGameover;
   private boolean _isGoal;
+  Animation _hpback, _hpfront;
 
-  void setup(){
+  void setup() {
     _isGameover = false;
     _isGoal = false;
 
@@ -20,30 +22,33 @@ class Game{
     _stage = (new StageLoader()).loadStage("stage.png", loadedEnemies);
 
     setupEntities(loadedEnemies);
+   
+    _hpback=new Animation("HPIro", 5);
+    _hpfront=new Animation("HPCabar", 6);
   }
 
-  void setupEntities(List<Entity> enemyList){
+  void setupEntities(List<Entity> enemyList) {
     _entities.clear();
     _enemies.clear();
     _effects.clear();
 
     _hero = new Hero();
-
+    
     _entities.add(_hero);
     _enemies.addAll(enemyList);
     _entities.addAll(_enemies);
-    for(Entity entity: _entities){
+    for (Entity entity : _entities) {
       entity.setStage(_stage);
     }
   }
 
-  void update(){
+  void update() {
     updateEntities();
   }
 
-  void updateEntities(){
+  void updateEntities() {
     _collisionDetector.update(_entities);
-    for(Entity entity: _entities){
+    for (Entity entity : _entities) {
       entity.update();
     }
 
@@ -51,17 +56,17 @@ class Game{
 
     //ゲームオーバの条件チェック
     //体力切れ
-    if(_hero.hitPoint() <= 0){
+    if (_hero.hitPoint() <= 0) {
       _isGameover = true;
     }
     //画面下に落下した場合
-    if(_hero.y() > 15*16){
+    if (_hero.y() > 15*16) {
       _isGameover = true;
     }
 
     //クリア条件
     //stageの右端にたどり着く
-    if(_stage.width()*16 < _hero.x()) {
+    if (_stage.width()*16 < _hero.x()) {
       _isGoal = true;
     }
   }
@@ -88,14 +93,39 @@ class Game{
     drawEntities();
     popMatrix();
     drawStatus();
+   if (_hero.hitPoint()>=50) {
+      translate(64, 8);
+      _hpback.draw(0);
+      _hpfront.draw(0);
+    }
+    if (_hero.hitPoint()<50 && _hero.hitPoint()>=40) {
+      translate(64, 8);
+      _hpback.draw(1);
+      _hpfront.draw(1);
+    }
+    if (_hero.hitPoint()<40 && _hero.hitPoint()>=30) {
+      translate(64, 8);
+      _hpback.draw(2);
+      _hpfront.draw(2);
+    }
+    if (_hero.hitPoint()<30&&_hero.hitPoint()>=20) {
+      translate(64, 8);
+      _hpback.draw(3);
+      _hpfront.draw(4);
+    }
+    if (_hero.hitPoint()<20) {
+      translate(64, 8);
+      _hpback.draw(4);
+      _hpfront.draw(5);
+    }
   }
 
-  void drawStatus(){
+  void drawStatus() {
     //TODO
   }
 
-  void drawEntities(){
-    for(Entity entity: _entities){
+  void drawEntities() {
+    for (Entity entity : _entities) {
       pushMatrix();
       translate(int(entity.x()), int(entity.y()));
       entity.draw();
@@ -103,22 +133,21 @@ class Game{
     }
   }
 
-  void keyPressed(char k, int kCode){
+  void keyPressed(char k, int kCode) {
     _hero.keyPressed(k, kCode);
     if(k == 'z'){
       _entities.add(new Shock(_hero.x()+8, _hero.y()+8));
     }
   }
 
-  void keyReleased(char k, int kCode){
+  void keyReleased(char k, int kCode) {
     _hero.keyReleased(k, kCode);
   }
 
-  boolean isGameover(){
+  boolean isGameover() {
     return _isGameover;
   }
-  boolean isGoal(){
+  boolean isGoal() {
     return _isGoal;
   }
-
 }
