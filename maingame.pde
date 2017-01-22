@@ -1,4 +1,4 @@
-Resources resources = new Resources();
+ Resources resources = new Resources();
 static int displayScale = 2;
 Game game = new Game();
 
@@ -13,7 +13,7 @@ void setup(){
   try{
     resources.minim = new Minim(this);
   }catch(Exception e){}
-
+  
   gameStatus = GameStatus.Title;
   game.setup();
 }
@@ -21,9 +21,9 @@ void setup(){
 void draw(){
   println(gameStatus);
   background(0,0,0);
-
   pushMatrix();
   scale(displayScale, displayScale);
+  
 
   if(gameStatus == GameStatus.Title){
     pushMatrix();
@@ -38,7 +38,7 @@ void draw(){
   if(gameStatus == GameStatus.Playing){
     game.update();
     game.draw();
-
+   
     if(game.isGameover()){
       gameStatus = GameStatus.Gameover;
     }
