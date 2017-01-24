@@ -66,7 +66,7 @@ class Game {
 
     //クリア条件
     //stageの右端にたどり着く
-    if (_stage.width()*16 < _hero.x()) {
+    if ((_stage.width()-5)*16< _hero.x()) {
       _isGoal = true;
     }
   }
@@ -83,7 +83,7 @@ class Game {
 
   void draw(){
     pushMatrix();
-    translate(20*8, 20*8);
+    translate(20*8, 15*8);
     resources.draw("back3.png");
     popMatrix();
 

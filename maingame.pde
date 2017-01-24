@@ -16,6 +16,7 @@ void setup(){
     resources.minim = new Minim(this);
   }catch(Exception e){}
   
+  resources.loop("bgm&se/maingame_bgm.wav");
   gameStatus = GameStatus.Title;
   game.setup();
 }
@@ -64,10 +65,12 @@ e.printStackTrace();
    
     if(game.isGameover()){
       gameStatus = GameStatus.Gameover;
+      resources.close("bgm&se/maingame_bgm.wav");
     }
 
     if(game.isGoal()){
       gameStatus = GameStatus.Clear;
+      resources.close("bgm&se/maingame_bgm.wav");
     }
   }
 
@@ -117,6 +120,7 @@ void keyPressed() {
       break;
     case Endroll:
       gameStatus = GameStatus.Title;
+      resources.loop("bgm&se/maingame_bgm.wav");
       break;
   }
 }
